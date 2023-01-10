@@ -23,7 +23,7 @@ for(const p of products){
 }
 log(names);
 
-log(map(p => p.name, products));
+log(map(p => p.name, products));        // p => p.name 의 표현이 왜 이렇게 되는지 궁금..
 
 let prices = [];
 for(const p of products){
@@ -33,8 +33,26 @@ log(prices);
 
 log(map(p => p.price, products));
 
-// 이터러블 프로토콜을 따른 map의 다형성
 
+// 이터러블 프로토콜을 따른 map의 다형성
+log([1,2,3].map(a => a + 1));
+
+function *gen(){
+    yield 2;
+    yield 3;
+    yield 4;
+}
+log(map(a => a * a, gen()));
+
+let m = new Map();
+m.set('a', 10);
+m.set('b', 20);
+const it = m[Symbol.iterator]();
+// log(it.next());
+// log(it.next());
+// log(it.next());
+log(map(([k,a]) => [k, a*2], m));
+log(new Map(map(([k,a]) => [k, a*2], m)));
 
 
 // filter
