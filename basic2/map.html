@@ -109,4 +109,49 @@
     yield 5;
   }()));
 
+  console.clear();
+
+</script>
+
+# reduce
+
+<script>
+
+    const nums = [1,2,3,4,5];
+
+    let total = 0;
+
+    for(const a of nums){
+        total = total + a;
+    }
+    log(total);
+
+    const reduce = (f, acc, iter) => {
+        if(!iter){
+            iter = acc[Symbol.iterator]();
+            acc = iter.next().value;
+        }
+        for(const a of iter){
+            acc = f(acc, a);
+        }
+        return acc;
+    }
+
+    const add = (a,b) => a + b;
+    log(reduce(add, 0, [1,2,3,4,5]));
+    // 15
+
+    // reduce 함수는 결국 이런 로직이 되어야함.
+    log(add(add(add(add(add(0,1),2),3),4),5));
+    // 15
+
+    log(reduce(add, [1,2,3,4,5]));
+    // 15
+
+    log(
+        reduce(
+            (total_price, products) => total_price + products.price,
+        0,
+        products));
+
 </script>
